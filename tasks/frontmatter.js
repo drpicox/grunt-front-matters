@@ -29,24 +29,26 @@ module.exports = function (grunt) {
 		function compileFrontmatter(body, options, filepath) {
 
 			var lines = body.split('\n');
-			var end = 0;
-			if (lines[0] === '---') {
-				end = end + 1;
-			}
-			while (lines[end] !== '---' && lines[end] !== lines[-1]) {
-				end = end + 1;
-			}
-
-			var yaml = lines.slice(1, end).join('\n');
-			var data = YAML.parse(yaml);
-
 			var basename = filepath.split('/').slice(-1)[0].split('.')[0];
-			var preview = lines.slice(end+1).join(' ').slice(0, options.width);
 
-			data.basename = basename;
-			data.preview = preview;
+			var end = 0;			
+			if (lines[0] === '---') {
+				end = 1;
+				while (lines[end] !== '---' && lines[end] !== lines[-1]) {
+					end++;
+				}
 
-			return data;
+				var preview = lines.slice(end+1).join(' ').slice(0, options.width);
+				var yaml = lines.slice(1, end).join('\n');
+				var data = YAML.parse(yaml);
+
+				data.basename = basename;
+				data.preview = preview;
+
+				return data;
+			} else {
+				return {basename: basename, preview: body.slice(0, options.width)};
+			}
 		}
 
 		function concatOutput(files, options) {
