@@ -47,7 +47,6 @@ module.exports = function (grunt) {
 					if (options.width === 'sentence') {
 						preview = preview.split('. ')[0] + '.';
 					} else if (options.width.slice && options.width.slice(-1) === 's') {
-						console.log(' --> "'+options.width+'"', JSON.stringify(preview.split('. ')));
 						preview = preview.split('. ').slice(0, parseInt(options.width,10)).join('. ') + '.';
 					} else {
 						preview = preview.slice(0, options.width);
