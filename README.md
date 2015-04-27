@@ -82,9 +82,11 @@ linebreaks, making the resulting .json file smaller.
 
 #### options.width
 
-Type: `Int`
-Default value: `70`
+Type: `Int` | `String`
+Default value: `"sentence"`
 
-No more than `width` charactes from the Markdown file's body is saved in
-the `preview` element. Trailing ellipses are added.
+If it is an Integer no more than `width` charactes from the Markdown file's body is saved in the `preview` element. Trailing ellipses are not added.
+If it is `"sentence"` saves until the first `". "`, if it is a String `number` + `"s"` (ex: `"2s"`) it is the number of sentences.
+
+If preview defined in the frontmatter of a file, it takes it as preview and ignores this option.
 
