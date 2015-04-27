@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 
 		var options = this.options({
 			minify: false,
-			width: 100, 
+			width: 'sentence', 
 			metadata: {},
 		});
 
@@ -38,12 +38,24 @@ module.exports = function (grunt) {
 					end++;
 				}
 
-				var preview = lines.slice(end+1).join(' ').slice(0, options.width);
 				var yaml = lines.slice(1, end).join('\n');
 				var data = YAML.parse(yaml);
 
+				var preview = data.preview;
+				if (!preview) {
+					preview = lines.slice(end+1).join(' ');
+					if (options.width === 'sentence') {
+						preview = preview.split('. ')[0] + '.';
+					} else if (options.width.slice && options.width.slice(-1) === 's') {
+						console.log(' --> "'+options.width+'"', JSON.stringify(preview.split('. ')));
+						preview = preview.split('. ').slice(0, parseInt(options.width,10)).join('. ') + '.';
+					} else {
+						preview = preview.slice(0, options.width);
+					}
+				}
+
 				data.basename = basename;
-				data.preview = preview;
+				data.preview = data.preview || preview;
 
 				return data;
 			} else {
