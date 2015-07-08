@@ -1,6 +1,6 @@
 {
   "name": "grunt-frontmatter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Creates a json file from many files with yaml frontmatter",
   "main": "index.js",
   "scripts": {
