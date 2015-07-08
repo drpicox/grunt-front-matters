@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 		function compileFrontmatter(body, options, filepath) {
 
 			var lines = body.split('\n');
-			var basename = filepath.split('/').slice(-1)[0].split('.')[0];
+			var basename = filepath.split('/').slice(-1)[0].split('\\').slice(-1)[0].split('.')[0];
 
 			var end = 0;			
 			if (lines[0] === '---') {
