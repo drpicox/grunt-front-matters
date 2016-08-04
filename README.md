@@ -55,7 +55,7 @@ Now `grunt release` will build a `release` folder that looks like this:
 
 ### Configuring your "frontmatter" task
 
-In your project's Gruntfile, add a section named `m2j` to
+In your project's Gruntfile, add a section named `frontmatter` to
 the data object passed into `grunt.initConfig()`.
 
     frontmatter: {
