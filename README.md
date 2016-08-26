@@ -8,6 +8,7 @@ In addition to data already present in the YAML following fields are added:
 
 - `preview` of the actual body content
 - `basename` of the filename
+- `md5` with the _md5_ signature of the file body
 
 
 ## The "frontmatter" task
@@ -55,7 +56,7 @@ Now `grunt release` will build a `release` folder that looks like this:
 
 ### Configuring your "frontmatter" task
 
-In your project's Gruntfile, add a section named `m2j` to
+In your project's Gruntfile, add a section named `frontmatter` to
 the data object passed into `grunt.initConfig()`.
 
     frontmatter: {
