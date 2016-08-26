@@ -31,7 +31,8 @@ module.exports = function (grunt) {
 			var lines = body.split(/[\n\r]+/g);
 			var basename = filepath.split('/').slice(-1)[0].split('.')[0];
 
-			var end = 0;			
+			var end = 0;
+			var data;			
 			if (lines[0] === '---') {
 				end = 1;
 				while (lines[end] !== '---' && lines[end] !== lines[-1]) {
@@ -48,18 +49,24 @@ module.exports = function (grunt) {
 						preview = preview.split('. ')[0] + '.';
 					} else if (options.width.slice && options.width.slice(-1) === 's') {
 						preview = preview.split('. ').slice(0, parseInt(options.width,10)).join('. ') + '.';
-					} else {
+					} else if (options.width > 0) {
 						preview = preview.slice(0, options.width);
+					} else {
+						preview = undefined;
 					}
 				}
 
 				data.basename = basename;
 				data.preview = data.preview || preview;
-
-				return data;
 			} else {
-				return {basename: basename, preview: body.slice(0, options.width)};
+				data = {
+					basename: basename, 
+					preview: body.slice(0, options.width),
+				};
 			}
+
+			data.md5 = md5(body);
+			return data;
 		}
 
 		function concatOutput(files, options) {

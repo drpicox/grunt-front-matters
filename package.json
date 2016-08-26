@@ -27,6 +27,7 @@
   "homepage": "https://github.com/drpicox/grunt-frontmatter",
   "dependencies": {
     "chalk": "^0.5.1",
+    "md5": "^2.1.0",
     "yamljs": "^0.2.1"
   }
 }
