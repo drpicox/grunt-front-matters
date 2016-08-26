@@ -2,6 +2,7 @@
 
 var chalk = require('chalk');
 var YAML = require('yamljs');
+var md5 = require('md5');
 
 
 // task implementation
