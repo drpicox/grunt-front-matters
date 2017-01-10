@@ -81,6 +81,14 @@ Default value: `false`
 If true, then the JSON.stringify is instructed to strip unnecessary
 linebreaks, making the resulting .json file smaller.
 
+#### options.dirname
+
+Type: `Boolean`
+Default value: `false`
+
+If true, then each entry has the `dirname` entry and object keys are
+composed with `dirname + '/' + basename`.
+
 #### options.width
 
 Type: `Int` | `String`
@@ -90,4 +98,9 @@ If it is an Integer no more than `width` charactes from the Markdown file's body
 If it is `"sentence"` saves until the first `". "`, if it is a String `number` + `"s"` (ex: `"2s"`) it is the number of sentences.
 
 If preview defined in the frontmatter of a file, it takes it as preview and ignores this option.
+
+
+### More Examples
+
+See [examples](examples).
 

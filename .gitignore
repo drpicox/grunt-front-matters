@@ -1,1 +1,3 @@
 node_modules
+examples/nested/data.json
+examples/plain/posts.json

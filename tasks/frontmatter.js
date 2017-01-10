@@ -12,6 +12,7 @@ module.exports = function (grunt) {
 
 		var options = this.options({
 			minify: false,
+      dirname: false,
 			width: 'sentence', 
 			metadata: {},
 		});
@@ -29,8 +30,7 @@ module.exports = function (grunt) {
 
 		function compileFrontmatter(body, options, filepath) {
 
-			var lines = body.split(/[\n\r]+/g);
-			var basename = filepath.split('/').slice(-1)[0].split('.')[0];
+			var lines = body.split(/[\n\r]+/g);      
 
 			var end = 0;
 			var data;			
@@ -57,18 +57,36 @@ module.exports = function (grunt) {
 					}
 				}
 
-				data.basename = basename;
 				data.preview = data.preview || preview;
 			} else {
 				data = {
-					basename: basename, 
 					preview: body.slice(0, options.width),
 				};
 			}
 
-			data.md5 = md5(body);
+      computeBasename(data, filepath);
+      computeDirname(data, options, filepath);
+			computeMd5(data, body);
 			return data;
 		}
+
+    function computeBasename(data, filepath) {
+      var basename = filepath.split('/').slice(-1)[0].split('.')[0];
+
+      data.basename = basename;
+    }
+
+    function computeDirname(data, options, filepath) {
+      if (options.dirname) {
+        var dirname = filepath.split('/').slice(0, -1).join('/');
+
+        data.dirname = dirname;
+      }
+    }
+
+    function computeMd5(data, body) {
+      data.md5 = md5(body);
+    }
 
 		function concatOutput(files, options) {
 			var result;
@@ -77,7 +95,8 @@ module.exports = function (grunt) {
 			files.forEach(function(filepath) {
 				var body = grunt.file.read(filepath);
 				var data = compileFrontmatter(body, options, filepath);
-				result[data.basename] = data;
+        var key = options.dirname ? data.dirname + '/' + data.basename : data.basename;
+				result[key] = data;
 			});
 
 			if (options.minify) {

@@ -1,0 +1,15 @@
+{
+  "name": "grunt-frontmatter-example-nested",
+  "version": "1.0.0",
+  "description": "Example of nested use of grunt-frontmatter",
+  "main": "index.js",
+  "scripts": {
+    "example": "grunt frontmatter"
+  },
+  "author": "David Rodenas",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-frontmatter": "^1.1.1"
+  }
+}
